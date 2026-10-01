@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="AI 整理评论、连接真人讨论的小红书社区场景 Demo">
+  <title>悉尼租房半年，我踩过的 7 个坑</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff2442'/%3E%3Cpath d='M17 34 32 20l15 14v16H36V39h-8v11H17Z' fill='white'/%3E%3C/svg%3E">
+  <style>
+    :root{--red:#ff2442;--text:#272727;--muted:#8b8b8b;--line:#f0f0f0;--soft:#f6f6f6;--blue:#174c83;--safe-bottom:env(safe-area-inset-bottom,0px)}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{background:#f4f4f4;scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;color:var(--text);background:#fff;font-size:16px;line-height:1.55}
+    button,input{font:inherit;color:inherit}
+    button{border:0;background:none;padding:0;cursor:pointer}
+    svg{display:block}
+    .app{width:100%;min-height:100svh;background:#fff;padding-bottom:calc(74px + var(--safe-bottom));overflow:hidden}
+    .status{height:30px;padding:7px 19px 0;display:flex;align-items:center;justify-content:space-between;font-weight:650;font-size:13px;letter-spacing:.1px;background:#fff}
+    .status-icons{display:flex;align-items:center;gap:7px}
+    .signal{display:flex;gap:2px;align-items:end;height:11px}.signal i{width:3px;border-radius:2px;background:#111;display:block}.signal i:nth-child(1){height:4px}.signal i:nth-child(2){height:7px}.signal i:nth-child(3){height:10px}.signal i:nth-child(4){height:11px;opacity:.23}
+    .battery{width:21px;height:10px;border:1.4px solid #222;border-radius:3px;position:relative;padding:1.5px}.battery:after{content:"";position:absolute;right:-3px;top:2.5px;width:2px;height:4px;border-radius:0 2px 2px 0;background:#555}.battery span{display:block;height:100%;width:76%;border-radius:1px;background:#34c759}
+    .nav{height:58px;display:flex;align-items:center;padding:0 15px 0 13px;gap:11px;background:#fff;position:sticky;top:0;z-index:20;border-bottom:1px solid transparent;transition:border .2s}
+    .nav.scrolled{border-color:#f4f4f4}
+    .icon-btn{width:34px;height:40px;display:grid;place-items:center;flex:none}
+    .author-avatar,.avatar{border-radius:50%;display:grid;place-items:center;overflow:hidden;flex:none;background:linear-gradient(140deg,#ffe0d7,#ffd2e0);border:1px solid rgba(0,0,0,.035)}
+    .author-avatar{width:37px;height:37px;font-size:21px}
+    .author-name{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+    .follow{height:32px;min-width:70px;border:1px solid var(--red);color:var(--red);border-radius:18px;font-weight:550;font-size:15px}
+    .hero{position:relative;background:#e8edf2;aspect-ratio:4/4.35;overflow:hidden}
+    .hero img{width:100%;height:100%;display:block;object-fit:cover}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.07))}
+    .cover-copy{position:absolute;left:22px;right:22px;bottom:25px;z-index:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.32)}
+    .cover-kicker{font-size:14px;font-weight:600;letter-spacing:1.2px;margin-bottom:5px}.cover-title{font-size:30px;line-height:1.14;font-weight:780;letter-spacing:-.8px}.cover-sub{font-size:14px;margin-top:9px;font-weight:500}
+    .pager{position:absolute;right:13px;top:13px;z-index:2;color:#fff;background:rgba(0,0,0,.45);font-size:12px;border-radius:14px;padding:3px 9px}
+    .note{padding:19px 17px 18px;border-bottom:1px solid var(--line)}
+    h1{font-size:21px;line-height:1.35;margin:0 0 10px;font-weight:700;letter-spacing:-.2px}
+    .note p{margin:0;font-size:16px;line-height:1.72}
+    .hashtags{color:var(--blue);margin-top:8px!important}
+    .note-meta{display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:#9b9b9b;font-size:13px}
+    .dislike{border:1px solid #e8e8e8;border-radius:15px;padding:2px 9px;color:#777}
+    .comments{padding-top:0}
+    .comments-title{padding:16px 17px 10px;font-size:16px;font-weight:650;display:flex;align-items:center;justify-content:space-between}
+    .comments-title .sort{display:flex;align-items:center;gap:4px;color:#555;font-size:13px;font-weight:450}
+    .topic-block{position:relative;margin:0 13px 14px;padding:11px 12px 10px;border-radius:12px;background:linear-gradient(140deg,#fff8f9 0%,#fff 72%);border:1px solid #f1e9ea;box-shadow:0 4px 13px rgba(48,22,27,.035)}
+    .topic-head{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+    .topic-mark{width:22px;height:22px;border-radius:7px;background:var(--red);display:grid;place-items:center;color:#fff}
+    .topic-heading{font-weight:680;font-size:15.5px}.topic-hint{font-size:11px;color:#aaa;margin-left:auto}
+    .topic-guide{position:absolute;z-index:5;left:86px;top:-25px;display:flex;align-items:center;gap:5px;height:27px;padding:0 9px;border-radius:7px;background:#fff;color:#454545;font-size:11px;font-weight:520;box-shadow:0 3px 12px rgba(0,0,0,.12);border:1px solid #ededed;pointer-events:none;animation:guideFloat 1.8s ease-in-out infinite}.topic-guide:after{content:"";position:absolute;left:24px;bottom:-4px;width:8px;height:8px;background:#fff;border-right:1px solid #ededed;border-bottom:1px solid #ededed;transform:rotate(45deg)}.guide-dot{width:15px;height:15px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:700}@keyframes guideFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+    .topic-list{display:flex;gap:7px;overflow-x:auto;padding-bottom:1px;scrollbar-width:none}.topic-list::-webkit-scrollbar{display:none}
+    .topic-pill{white-space:nowrap;border-radius:15px;background:#f5f5f5;padding:5px 10px;font-size:13px;color:#494949;transition:.15s}.topic-pill:active{transform:scale(.97);background:#eee}.topic-pill b{font-size:11px;color:#999;font-weight:500;margin-left:2px}
+    .comment-list{padding:0 16px}
+    .comment{display:flex;gap:10px;padding:12px 0 13px;border-bottom:1px solid #f5f5f5;animation:fadein .24s ease both}
+    @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .avatar{width:36px;height:36px;font-size:19px}.avatar.a2{background:linear-gradient(140deg,#d9ecff,#d7dcff)}.avatar.a3{background:linear-gradient(140deg,#e9f7d7,#ccebd6)}.avatar.a4{background:linear-gradient(140deg,#fff0c7,#ffd4a8)}.avatar.me{background:linear-gradient(140deg,#ffd1d8,#ffedf0)}
+    .comment-body{min-width:0;flex:1}.user{font-size:12.5px;color:#999;margin-bottom:3px}.comment-text{font-size:15px;line-height:1.56;word-break:break-word}.comment-text .link{color:var(--blue)}
+    .comment-meta{display:flex;align-items:center;gap:10px;color:#aaa;font-size:12px;margin-top:7px}.reply{color:#666}.like{margin-left:auto;display:flex;align-items:center;gap:4px;color:#777}
+    .nested{margin-top:9px;padding:8px 10px;background:#f7f7f7;border-radius:8px;font-size:14px;line-height:1.55}.nested b{font-weight:500;color:#777}
+    .room{display:none}.room.active{display:block}.feed.hidden{display:none}
+    .room-header{padding:8px 16px 13px;border-bottom:1px solid #f1e6e8;background:linear-gradient(180deg,#fff8f9 0%,#fff 100%);position:sticky;top:58px;z-index:10}
+    .room-back{display:inline-flex;align-items:center;gap:2px;color:#777;font-size:13px;margin-bottom:7px}.room-title-row{display:flex;align-items:end;justify-content:space-between}.room-title{font-size:19px;font-weight:700;line-height:1.25}.room-count{font-size:12px;color:#999;margin-top:3px}.room-note{font-size:11.5px;color:#aaa}
+    .result-bar{padding:12px 16px 4px;color:#999;font-size:12px;display:flex;align-items:center}
+    .new-comment{background:#fff8f9;margin:3px -7px 0;padding-left:7px;padding-right:7px;border-radius:10px;border-bottom-color:transparent}.new-badge{display:inline-block;color:var(--red);background:#ffe8ec;border-radius:8px;padding:1px 6px;margin-left:5px;font-size:11px;vertical-align:1px}
+    .bottom{position:fixed;z-index:30;left:0;right:0;bottom:0;height:calc(64px + var(--safe-bottom));padding:9px 13px calc(9px + var(--safe-bottom));background:rgba(255,255,255,.96);border-top:1px solid #ececec;backdrop-filter:blur(14px);display:flex;align-items:center;gap:10px}
+    .input-shell{height:43px;background:#f5f5f5;border-radius:23px;display:flex;align-items:center;gap:8px;padding:0 13px;flex:1;min-width:0}.input-shell input{border:0;outline:0;background:transparent;width:100%;font-size:15px}.input-shell input::placeholder{color:#aaa}
+    .send{display:none;height:37px;min-width:55px;border-radius:19px;background:var(--red);color:#fff;font-size:14px;font-weight:600}.send.show{display:block}
+    .actions{display:flex;align-items:center;gap:14px}.action{display:flex;flex-direction:column;align-items:center;font-size:11px;gap:1px;min-width:30px}.action svg{width:24px;height:24px}
+    .toast{position:fixed;z-index:60;left:50%;bottom:calc(79px + var(--safe-bottom));transform:translate(-50%,12px);opacity:0;pointer-events:none;white-space:nowrap;border-radius:20px;padding:9px 14px;color:#fff;background:rgba(34,34,34,.88);font-size:13px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .classifying{display:inline-flex;align-items:center;gap:6px}.dotwave{display:inline-flex;gap:2px}.dotwave i{width:3px;height:3px;background:#fff;border-radius:50%;animation:pulse 1s infinite}.dotwave i:nth-child(2){animation-delay:.15s}.dotwave i:nth-child(3){animation-delay:.3s}@keyframes pulse{0%,70%,100%{opacity:.35}35%{opacity:1}}
+    .empty-tail{text-align:center;color:#c0c0c0;font-size:12px;padding:22px 0 26px}
+    @media(min-width:560px){body{padding:18px 0;background:#efefef}.app{max-width:430px;margin:0 auto;box-shadow:0 12px 50px rgba(0,0,0,.12);border-radius:22px;min-height:calc(100svh - 36px)}.bottom{left:50%;right:auto;width:430px;transform:translateX(-50%);border-radius:0 0 22px 22px}.toast{bottom:90px}}
+  </style>
+</head>
+<body>
+<main class="app" id="app">
+  <div class="status"><span>20:27</span><div class="status-icons"><div class="signal"><i></i><i></i><i></i><i></i></div><svg width="16" height="12" viewBox="0 0 20 14" aria-hidden="true"><path d="M2 5.8c4.6-4.5 11.4-4.5 16 0M5 8.8c2.9-2.8 7.1-2.8 10 0M8.3 12c.9-.9 2.5-.9 3.4 0" fill="none" stroke="#111" stroke-width="2.1" stroke-linecap="round"/></svg><div class="battery"><span></span></div></div></div>
+  <header class="nav" id="nav">
+    <button class="icon-btn" id="topBack" aria-label="返回"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M15 4 7 12l8 8" fill="none" stroke="#242424" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="author-avatar">🏠</div><div class="author-name">悉尼租房研究所</div>
+    <button class="follow" id="followBtn">关注</button>
+    <button class="icon-btn" aria-label="分享"><svg width="25" height="25" viewBox="0 0 24 24"><path d="m15 5 4 4-4 4M19 9h-8a6 6 0 0 0-6 6v3" fill="none" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </header>
+
+  <section class="feed" id="feed">
+    <div class="hero"><img src="sydney-rental-cover.png" alt="悉尼公寓租房场景"><span class="pager">1/6</span><div class="cover-copy"><div class="cover-kicker">SYDNEY RENTING NOTES</div><div class="cover-title">悉尼租房半年<br>我踩过的 7 个坑</div><div class="cover-sub">押金｜账单｜退租清洁｜维修</div></div></div>
+    <article class="note"><h1>悉尼租房半年，我踩过的 7 个坑</h1><p>第一次在悉尼租房真的交了不少学费…看房、交 Bond、入住拍照、退租清洁，每一步都有细节。把半年里踩过的坑整理出来，希望准备租房的姐妹少走弯路。</p><p class="hashtags">#悉尼租房 #澳洲生活 #留学生租房 #租房避坑</p><div class="note-meta"><span>编辑于 09-22 · 悉尼</span><span class="dislike">☹ 不喜欢</span></div></article>
+    <section class="comments"><div class="comments-title"><span id="commentsTitle">共 186 条评论</span><span class="sort">按热度 <svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 5h10M5 8h6m-4 3h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span></div>
+      <div class="topic-block" id="topicBlock"><div class="topic-guide" id="topicGuide" aria-hidden="true"><span class="guide-dot">!</span><span>点一下，看看大家在聊什么</span></div><div class="topic-head"><div class="topic-mark"><svg width="14" height="14" viewBox="0 0 20 20"><path d="M5 5.5h10M5 10h7M5 14.5h5" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div><span class="topic-heading">大家都在聊</span><span class="topic-hint">定期整理</span></div><div class="topic-list" id="topicList"><button class="topic-pill" data-topic="bond">押金纠纷 <b>48</b></button><button class="topic-pill" data-topic="bill">水电费 <b>36</b></button><button class="topic-pill" data-topic="clean">退租清洁 <b>27</b></button><button class="topic-pill" data-topic="repair">房东维修 <b>19</b></button><button class="topic-pill" data-topic="area">区域选择 <b>14</b></button></div></div>
+      <div class="comment-list" id="generalComments"></div><div class="empty-tail">— 已经到底了 —</div>
+    </section>
+  </section>
+
+  <section class="room" id="room">
+    <div class="room-header"><button class="room-back" id="roomBack"><svg width="16" height="16" viewBox="0 0 16 16"><path d="m10 3-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>返回全部评论</button><div class="room-title-row"><div><div class="room-title" id="roomTitle">押金纠纷</div><div class="room-count" id="roomCount">48 人参与 · 从评论中整理</div></div><span class="room-note">真人讨论</span></div></div>
+    <div class="result-bar"><span id="resultCount">12 条相关评论</span></div>
+    <div class="comment-list" id="roomComments"></div><div class="empty-tail">— 还有更多相关讨论 —</div>
+  </section>
+</main>
+
+<footer class="bottom"><div class="input-shell"><svg width="21" height="21" viewBox="0 0 24 24"><path d="m4 17-.5 3.5L7 20l11-11-3-3L4 17Zm9.5-9.5 3 3" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><input id="commentInput" aria-label="发表评论" placeholder="说点什么…" maxlength="140"></div><button class="send" id="sendBtn">发布</button><div class="actions" id="actions"><button class="action" aria-label="点赞"><svg viewBox="0 0 24 24"><path d="M12 20s-8-4.6-8-10.1A4.1 4.1 0 0 1 11.2 7L12 8l.8-1A4.1 4.1 0 0 1 20 9.9C20 15.4 12 20 12 20Z" fill="none" stroke="#222" stroke-width="1.8"/></svg><span>328</span></button><button class="action" aria-label="收藏"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z" fill="none" stroke="#222" stroke-width="1.8" stroke-linejoin="round"/></svg><span>126</span></button><button class="action" aria-label="评论"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-9.1 7.9L5 21l1.6-4A8 8 0 1 1 20 11.5Z" fill="none" stroke="#222" stroke-width="1.8" stroke-linejoin="round"/></svg><span id="commentTotal">186</span></button></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const generalData=[
+ {avatar:'🐨',cls:'a2',name:'蓝桉在悉尼',text:'Bond 一定要确认是不是交到了 Fair Trading，不要只听中介说已经处理。我当时一直没收到邮件，后来才发现根本没登记。',time:'昨天 18:32 · 悉尼',likes:42,reply:'楼主回复：这个真的很重要！'},
+ {avatar:'🌷',cls:'a3',name:'小鹿不迷路',text:'退租被扣了 280 刀清洁费，但中介没有给 invoice。来回邮件两周，最后拿入住时的照片申诉回来了。',time:'昨天 21:07 · NSW',likes:37},
+ {avatar:'🍊',cls:'a4',name:'橘子海',text:'想问一下大家水费里 usage charge 也是租客付吗？每次账单项目都看不明白😭',time:'2天前 · 悉尼',likes:18},
+ {avatar:'🧸',cls:'',name:'Mia的南半球日记',text:'维修一定要留邮件记录！我们家热水坏了五天，中介一直打电话敷衍，改成邮件后第二天就派人来了。',time:'09-21 · 悉尼',likes:29},
+ {avatar:'🐼',cls:'a2',name:'在澳洲吃泡面',text:'我住 Burwood，上班去 city 还算方便，就是同样预算只能租到比较旧的房子。',time:'09-21 · Burwood',likes:21},
+ {avatar:'🥝',cls:'a3',name:'Kiwi不在新西兰',text:'大家退房都是自己打扫还是找清洁公司呀？中介给的 quote 感觉贵了一倍。',time:'09-20 · NSW',likes:14},
+ {avatar:'🦘',cls:'a4',name:'晚风过Parramatta',text:'电费开户时记得比较一下 plan，我一开始直接用了默认的，后来换套餐每季度省了不少。',time:'09-20 · 悉尼',likes:33},
+ {avatar:'☁️',cls:'a2',name:'云在南半球',text:'房东说墙面发霉是我不开窗造成的，但其实入住检查报告里已经有照片了，大家一定保存好报告。',time:'09-19 · Chatswood',likes:46},
+ {avatar:'🍓',cls:'',name:'草莓味搬家箱',text:'退租清洁最容易漏窗槽、烤箱和抽油烟机，交房前最好对着 condition report 一项项拍。',time:'09-19 · 悉尼',likes:51},
+ {avatar:'🌊',cls:'a3',name:'海边打工人',text:'Mascot 通勤方便，但看房时一定听一下关窗后的飞机噪音，每栋楼差别挺大。',time:'09-18 · Mascot',likes:25},
+ {avatar:'🪴',cls:'a4',name:'一盆绿萝',text:'漏水报修拖了十天，后来我把每次沟通时间整理成一封邮件，中介当天就回复了。',time:'09-18 · Rhodes',likes:38},
+ {avatar:'🐚',cls:'a2',name:'一只椰子',text:'请问押金一般多久能退呀？我们交钥匙一周了，中介一直说还在检查。',time:'09-17 · 悉尼',likes:12}
+];
+const topics={
+ bond:{name:'押金纠纷',count:48,total:12,comments:[
+  {avatar:'🌷',cls:'a3',name:'小鹿不迷路',text:'退租被扣了 280 刀清洁费，但中介没有给 invoice。来回邮件两周，最后拿入住时的照片申诉回来了。',time:'昨天 21:07 · NSW',likes:37,reply:'@一只椰子：请问是直接跟中介申诉吗？'},
+  {avatar:'🐼',cls:'a2',name:'在澳洲吃泡面',text:'我这次是交钥匙后第 6 天退的。之前一次拖了快三周，后来才知道租客自己也可以发起 Bond refund。',time:'昨天 19:18 · 悉尼',likes:31},
+  {avatar:'🥝',cls:'a3',name:'Kiwi不在新西兰',text:'正规登记后会收到 Rental Bonds Online 的确认邮件。没收到的话建议马上查，不要等退租时才发现。',time:'昨天 17:46 · NSW',likes:28},
+  {avatar:'🐨',cls:'a2',name:'蓝桉在悉尼',text:'中介说地毯必须 professional cleaning，但我翻合同没看到这一条。让他提供依据后就没再扣这笔。',time:'2天前 · 悉尼',likes:56},
+  {avatar:'☁️',cls:'a2',name:'云在南半球',text:'Bond 不是转给房东私人账户就结束了，最好自己保存登记编号和所有付款凭证。',time:'09-20 · Chatswood',likes:23}]},
+ bill:{name:'水电费',count:36,total:9,comments:[
+  {avatar:'🍊',cls:'a4',name:'橘子海',text:'水费账单里的 usage charge 一般是租客付，固定的 service charge 我们中介是让房东承担。',time:'2天前 · 悉尼',likes:18},
+  {avatar:'🦘',cls:'a4',name:'晚风过Parramatta',text:'电费开户记得比较 plan，默认套餐真的贵。我换完之后每季度少了大概七十刀。',time:'09-20 · 悉尼',likes:33},
+  {avatar:'💡',cls:'a2',name:'灯泡不熬夜',text:'我们两个人冬天电费突然翻倍，最后发现是浴室暖风忘了关。账单异常先看每天用量曲线。',time:'09-19 · Zetland',likes:27},
+  {avatar:'🐳',cls:'a3',name:'鲸鱼在通勤',text:'有些公寓燃气热水是统一供应，会单独收到一张账单，签约前最好问清楚。',time:'09-18 · Wolli Creek',likes:16}]},
+ clean:{name:'退租清洁',count:27,total:8,comments:[
+  {avatar:'🍓',cls:'',name:'草莓味搬家箱',text:'入住第一天一定拍完整视频，尤其是烤箱、窗槽和浴室水垢。我的清洁争议就是靠视频解决的。',time:'2天前 · 悉尼',likes:64},
+  {avatar:'🥝',cls:'a3',name:'Kiwi不在新西兰',text:'我们三个人自己打扫了一整天，中介复检只让补了阳台玻璃，没要求必须找公司。',time:'09-20 · NSW',likes:24},
+  {avatar:'🫧',cls:'a2',name:'泡泡清洁日记',text:'如果找清洁公司，最好提前确认是否包含返工。我那家第一次没过，第二次免费补做。',time:'09-19 · 悉尼',likes:35},
+  {avatar:'🐱',cls:'a4',name:'猫猫搬家中',text:'宠物房重点看地毯和气味，中介最后检查得特别细，最好提前两天做完。',time:'09-18 · Waterloo',likes:19}]},
+ repair:{name:'房东维修',count:19,total:7,comments:[
+  {avatar:'🧸',cls:'',name:'Mia的南半球日记',text:'维修一定要留邮件记录！我们家热水坏了五天，改成邮件沟通后第二天就派人来了。',time:'09-21 · 悉尼',likes:29},
+  {avatar:'🪴',cls:'a4',name:'一盆绿萝',text:'漏水报修拖了十天，我把每次沟通时间整理成一封邮件，中介当天就回复了。',time:'09-18 · Rhodes',likes:38},
+  {avatar:'🔧',cls:'a2',name:'扳手不会修',text:'紧急维修和普通维修处理速度差很多，报修时把有没有影响用水用电写清楚。',time:'09-17 · 悉尼',likes:22},
+  {avatar:'🌧️',cls:'a3',name:'雨天晒被子',text:'天花板渗水一定连续拍照记录变化，我们后来换房时这些都成了重要证据。',time:'09-16 · Eastwood',likes:31}]},
+ area:{name:'区域选择',count:14,total:6,comments:[
+  {avatar:'🐼',cls:'a2',name:'在澳洲吃泡面',text:'Burwood 去 city 方便、吃饭也多，但同预算房子会旧一点，周末主街比较吵。',time:'09-21 · Burwood',likes:21},
+  {avatar:'🌊',cls:'a3',name:'海边打工人',text:'Mascot 通勤方便，但看房时一定听关窗后的飞机噪音，每栋楼差别挺大。',time:'09-18 · Mascot',likes:25},
+  {avatar:'🚆',cls:'a4',name:'下一站Central',text:'别只看地图距离，最好在工作日早高峰实际走一次家到车站的路线。',time:'09-17 · 悉尼',likes:28},
+  {avatar:'☕️',cls:'',name:'拿铁住北区',text:'Chatswood 生活方便，预算有限可以看看离火车站一到两站公交的房子。',time:'09-16 · Chatswood',likes:17}]}
+};
+let activeTopic='bond',inRoom=false,totalComments=186;
+const heart=`<svg width="17" height="17" viewBox="0 0 24 24"><path d="M12 20s-8-4.6-8-10.1A4.1 4.1 0 0 1 11.2 7L12 8l.8-1A4.1 4.1 0 0 1 20 9.9C20 15.4 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>`;
+function card(c,isNew=false){return `<article class="comment ${isNew?'new-comment':''}"><div class="avatar ${c.cls||''}">${c.avatar}</div><div class="comment-body"><div class="user">${c.name}${isNew?'<span class="new-badge">刚刚</span>':''}</div><div class="comment-text">${c.text}</div>${c.reply?`<div class="nested"><b>${c.reply.split('：')[0]}：</b>${c.reply.split('：').slice(1).join('：')}</div>`:''}<div class="comment-meta"><span>${c.time}</span><button class="reply">回复</button><span class="like">${heart}${c.likes||''}</span></div></div></article>`}
+function renderGeneral(){document.getElementById('generalComments').innerHTML=generalData.map(c=>card(c,c.isNew)).join('')}
+function renderRoom(){const topic=topics[activeTopic];document.getElementById('roomTitle').textContent=topic.name;document.getElementById('roomCount').textContent=`${topic.count} 人参与 · 从评论中整理`;document.getElementById('resultCount').textContent=`${topic.total} 条相关评论`;document.getElementById('roomComments').innerHTML=topic.comments.map(c=>card(c,c.isNew)).join('')}
+function enterRoom(topicKey){inRoom=true;activeTopic=topicKey;const topic=topics[activeTopic];document.getElementById('topicGuide').style.display='none';document.getElementById('feed').classList.add('hidden');document.getElementById('room').classList.add('active');renderRoom();scrollTo({top:0,behavior:'smooth'});document.getElementById('commentInput').placeholder=`说点什么（将显示在「${topic.name}」讨论下）`}
+function leaveRoom(scrollToTopics=true){inRoom=false;document.getElementById('feed').classList.remove('hidden');document.getElementById('room').classList.remove('active');document.getElementById('commentInput').placeholder='说点什么…';if(scrollToTopics)setTimeout(()=>document.getElementById('topicBlock').scrollIntoView({block:'start'}),40)}
+document.querySelectorAll('[data-topic]').forEach(btn=>btn.addEventListener('click',()=>enterRoom(btn.dataset.topic)));
+document.getElementById('roomBack').onclick=()=>leaveRoom();document.getElementById('topBack').onclick=()=>inRoom?leaveRoom():showToast('已是当前笔记');
+const input=document.getElementById('commentInput'),send=document.getElementById('sendBtn'),actions=document.getElementById('actions');
+input.addEventListener('focus',()=>{send.classList.add('show');actions.style.display='none'});input.addEventListener('input',()=>send.classList.toggle('show',!!input.value.trim()));
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();publish()}});send.onclick=publish;
+function addGeneralComment(text){generalData.unshift({avatar:'😊',cls:'me',name:'我',text,time:'刚刚 · 悉尼',likes:'',isNew:true});totalComments+=1;document.getElementById('commentsTitle').textContent=`共 ${totalComments} 条评论`;document.getElementById('commentTotal').textContent=totalComments;renderGeneral()}
+function addTopicComment(text){const c={avatar:'😊',cls:'me',name:'我',text,time:'刚刚 · 悉尼',likes:'',isNew:true};const topic=topics[activeTopic];topic.comments.unshift(c);topic.total+=1;topic.count+=1;generalData.unshift(c);totalComments+=1;document.getElementById('commentsTitle').textContent=`共 ${totalComments} 条评论`;document.getElementById('commentTotal').textContent=totalComments;const countEl=document.querySelector(`[data-topic="${activeTopic}"] b`);if(countEl)countEl.textContent=topic.count;renderGeneral();renderRoom()}
+function publish(){const text=input.value.trim();if(!text)return;input.blur();input.value='';send.classList.remove('show');actions.style.display='flex';if(inRoom){const topicName=topics[activeTopic].name;addTopicComment(text);showToast(`已发布在「${topicName}」讨论下`);setTimeout(()=>document.getElementById('roomComments').scrollIntoView({behavior:'smooth',block:'start'}),60)}else{addGeneralComment(text);showToast('发布成功');setTimeout(()=>document.getElementById('generalComments').scrollIntoView({behavior:'smooth',block:'start'}),60)}}
+let toastTimer;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1700)}
+document.getElementById('followBtn').onclick=function(){this.textContent=this.textContent==='关注'?'已关注':'关注';this.style.borderColor=this.textContent==='关注'?'var(--red)':'#ddd';this.style.color=this.textContent==='关注'?'var(--red)':'#999'};
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>24));
+renderGeneral();renderRoom();
+
+if(document.modelContext?.registerTool){const life=new AbortController();Promise.resolve(document.modelContext.registerTool({name:'publish_comment',title:'发表评论',description:'在当前页面发表评论；位于话题讨论页时，评论会显示在该讨论下，否则显示在全部评论中。',inputSchema:{type:'object',properties:{content:{type:'string',minLength:1,maxLength:140}},required:['content'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:true},execute:async({content})=>{if(typeof content!=='string'||!content.trim()||content.length>140)throw new Error('评论内容需为 1–140 个字符');if(inRoom){const topicName=topics[activeTopic].name;addTopicComment(content.trim());return{status:'published',location:`${topicName}讨论`}}addGeneralComment(content.trim());return{status:'published',location:'全部评论'}}},{signal:life.signal})).catch(()=>{})}
+  </script>
+</body>
+</html>
